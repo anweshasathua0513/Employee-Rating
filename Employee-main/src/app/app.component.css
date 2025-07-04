@@ -1,0 +1,32 @@
+.fab-group-horizontal {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row;  /* Make buttons horizontal */
+  gap: 15px;
+  z-index: 1000;
+}
+
+.fab-btn {
+  color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+.fab-btn:hover {
+  transform: scale(1.1);
+}
+
+.fab-reset {
+
+  background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+.fab-save {
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+}
+
+.fab-exit {
+  background: linear-gradient(45deg, #ff6f61, #ff9a76);
+}
