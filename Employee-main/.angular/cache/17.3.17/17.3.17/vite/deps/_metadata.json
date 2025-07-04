@@ -1,0 +1,124 @@
+{
+  "hash": "bb8fa117",
+  "configHash": "5a3802ba",
+  "lockfileHash": "1e341562",
+  "browserHash": "68508eae",
+  "optimized": {
+    "@angular/animations": {
+      "src": "../../../../../node_modules/@angular/animations/fesm2022/animations.mjs",
+      "file": "@angular_animations.js",
+      "fileHash": "4eb2d093",
+      "needsInterop": false
+    },
+    "@angular/common": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "c064d09a",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "d9342200",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "0bfb7961",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "9c835339",
+      "needsInterop": false
+    },
+    "@angular/material/button": {
+      "src": "../../../../../node_modules/@angular/material/fesm2022/button.mjs",
+      "file": "@angular_material_button.js",
+      "fileHash": "e1f14574",
+      "needsInterop": false
+    },
+    "@angular/material/icon": {
+      "src": "../../../../../node_modules/@angular/material/fesm2022/icon.mjs",
+      "file": "@angular_material_icon.js",
+      "fileHash": "4de82235",
+      "needsInterop": false
+    },
+    "@angular/material/select": {
+      "src": "../../../../../node_modules/@angular/material/fesm2022/select.mjs",
+      "file": "@angular_material_select.js",
+      "fileHash": "da30024f",
+      "needsInterop": false
+    },
+    "@angular/material/slide-toggle": {
+      "src": "../../../../../node_modules/@angular/material/fesm2022/slide-toggle.mjs",
+      "file": "@angular_material_slide-toggle.js",
+      "fileHash": "0eacfc61",
+      "needsInterop": false
+    },
+    "@angular/material/tooltip": {
+      "src": "../../../../../node_modules/@angular/material/fesm2022/tooltip.mjs",
+      "file": "@angular_material_tooltip.js",
+      "fileHash": "a00c1bb3",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "47f73da1",
+      "needsInterop": false
+    },
+    "@angular/platform-browser/animations": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/animations.mjs",
+      "file": "@angular_platform-browser_animations.js",
+      "fileHash": "13dc118f",
+      "needsInterop": false
+    },
+    "@angular/platform-browser/animations/async": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/animations/async.mjs",
+      "file": "@angular_platform-browser_animations_async.js",
+      "fileHash": "bd2e8f64",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "56808aed",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "browser-D5GTT4TU": {
+      "file": "browser-D5GTT4TU.js"
+    },
+    "chunk-RSTAGZ5R": {
+      "file": "chunk-RSTAGZ5R.js"
+    },
+    "chunk-FW3BWH67": {
+      "file": "chunk-FW3BWH67.js"
+    },
+    "chunk-JKMS55UM": {
+      "file": "chunk-JKMS55UM.js"
+    },
+    "chunk-NBVC6V2Z": {
+      "file": "chunk-NBVC6V2Z.js"
+    },
+    "chunk-5DHWLQGT": {
+      "file": "chunk-5DHWLQGT.js"
+    },
+    "chunk-SYZNRODW": {
+      "file": "chunk-SYZNRODW.js"
+    },
+    "chunk-VNG2HDOQ": {
+      "file": "chunk-VNG2HDOQ.js"
+    },
+    "chunk-O65QOLNO": {
+      "file": "chunk-O65QOLNO.js"
+    },
+    "chunk-2SBDAC72": {
+      "file": "chunk-2SBDAC72.js"
+    }
+  }
+}
