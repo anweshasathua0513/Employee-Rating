@@ -1,0 +1,55 @@
+<!-- <header class="app-header">
+  <div class="logo">
+  <img src="assets/Logo.png" alt=" logo" />
+    </div>
+</header> -->
+
+<div class="form-container">
+  <h2 style="text-align: center;">Employee Performance Rating</h2>
+
+  <!-- 🔒 Non-editable fields -->
+  <div class="employee-info">
+    <label>
+      Employee ID:
+      <input type="text" [(ngModel)]="employeeId" name="employeeId" readonly />
+    </label>
+    <label>
+      Employee Name:
+      <input type="text" [(ngModel)]="employeeName" name="employeeName" readonly />
+    </label>
+  </div>
+
+  <form (ngSubmit)="submitForm()">
+    <label>Punctuality:</label>
+    <select [(ngModel)]="punctuality" name="punctuality">
+      <option *ngFor="let rate of ratings" [value]="rate">{{ rate }}</option>
+    </select>
+
+    <label>Problem Solving:</label>
+    <select [(ngModel)]="task_allocation" name="task_allocation">
+      <option *ngFor="let rate of ratings" [value]="rate">{{ rate }}</option>
+    </select>
+
+    <label>Teamwork:</label>
+    <select [(ngModel)]="teamwork" name="teamwork">
+      <option *ngFor="let rate of ratings" [value]="rate">{{ rate }}</option>
+    </select>
+
+    <label>Adaptability:</label>
+    <select [(ngModel)]="adaptability" name="adaptability">
+      <option *ngFor="let rate of ratings" [value]="rate">{{ rate }}</option>
+    </select>
+
+    <label>Communication:</label>
+    <select [(ngModel)]="communication" name="communication">
+      <option *ngFor="let rate of ratings" [value]="rate">{{ rate }}</option>
+    </select>
+
+    <label>Quantity and Quality:</label>
+    <select [(ngModel)]="quantity_and_quality" name="quantity_and_quality">
+      <option *ngFor="let rate of ratings" [value]="rate">{{ rate }}</option>
+    </select>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
