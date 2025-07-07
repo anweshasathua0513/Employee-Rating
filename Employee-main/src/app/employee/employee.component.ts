@@ -214,8 +214,10 @@ export class EmployeeComponent {
     }
   }
 
-  onReset() {
+  onReset(): void{
+    location.reload();
     this.employeeForm.reset();
+    this.employees.clear();
   }
 
   onExit() {
