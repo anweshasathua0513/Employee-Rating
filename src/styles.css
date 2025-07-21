@@ -1,0 +1,80 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --card-bg: #f9f9f9;
+  --input-bg-color: #ffffff;
+  --border-color: #cccccc;
+  --highlight-color: #ff6f00;
+  --error-color: #ff4c4c;
+  --button-gradient-start: #ff9800;
+  --button-gradient-end: #e65100;
+}
+
+.dark-mode {
+  --bg-color: #0d0d0d;
+  --text-color: #ffffff;
+  --card-bg: #d91c1cbd;
+  --border-color: #0d0d0dbd;
+  --highlight-color: #ff9800;
+  --error-color: #ff6f6f;
+  --button-gradient-start: #ff6f00;
+  --button-gradient-end: #ff3d00;
+}
+
+body, html {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+:root, .dark-mode {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+/* Force color for input placeholders, text, labels, and mat components */
+.dark-mode input,
+.dark-mode select,
+.dark-mode textarea,
+.dark-mode .mat-select-value,
+.dark-mode .mat-select-placeholder,
+.dark-mode .mat-slide-toggle .mat-slide-toggle-label-content,
+.dark-mode .mat-form-field-label,
+.dark-mode .mat-input-element,
+.dark-mode .mat-datepicker-toggle,
+.dark-mode .mat-datepicker-toggle-default-icon,
+.dark-mode .mat-hint {
+  color: var(--text-color) !important;
+}
+
+/* Placeholder styling */
+.dark-mode input::placeholder,
+.dark-mode select::placeholder,
+.dark-mode textarea::placeholder {
+  color: var(--text-color) !important;
+  opacity: 0.6;
+}
+
+
+/* ✅ Ensures dark text color applies to toggle label */
+.dark-mode ::ng-deep .mat-slide-toggle-label-content {
+  color: var(--text-color) !important;
+  font-weight: 500;
+}
+
+/* ✅ Style toggle thumb and bar for dark mode clarity */
+.dark-mode ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: var(--highlight-color) !important;
+}
+
+.dark-mode ::ng-deep .mat-slide-toggle-thumb {
+  background-color: white !important;
+}
