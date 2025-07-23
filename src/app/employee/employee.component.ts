@@ -55,8 +55,8 @@ export class EmployeeComponent {
       projectManagerEmail: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/)]],
       teamLeadName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       teamLeadEmail: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/)]],
-      projectManagementOfficeName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
-      projectManagementOfficeEmail: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/)]],
+      pmoName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
+      pmoEmail: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/)]],
       projectStartDate: ['', Validators.required],
       projectEndDate: ['', Validators.required],
       
