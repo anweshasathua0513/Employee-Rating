@@ -55,10 +55,12 @@ body.dark-theme,
   margin-right: 16px;
   display: flex;
   align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .theme-toggle-icon:hover {
   transform: scale(1.2);
+  filter: drop-shadow(0 0 6px orange) drop-shadow(0 0 12px orange);
 }
 
 
