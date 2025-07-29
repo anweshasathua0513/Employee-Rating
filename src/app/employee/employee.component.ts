@@ -187,7 +187,7 @@ export class EmployeeComponent {
     
   const employeeData = employeeGroup.value;
 
-    this.http.post('http://localhost:8080/api/save', employeeData)
+    this.http.post('https://docker-employee-rating-4.onrender.com/api/save', employeeData)
       .subscribe({
         next: () => alert(`Employee ${index + 1} saved successfully!`),
       error: err => alert('Error saving employee: ' + err.message)
@@ -204,7 +204,7 @@ export class EmployeeComponent {
       console.log('Form submitted:', this.employeeForm.value);
       alert('Form submitted successfully!');
 
-      this.http.post('https://docker-employee-rating-4.onrender.com/', this.employeeForm.value) 
+      this.http.post('https://docker-employee-rating-4.onrender.com/api/save', this.employeeForm.value) 
         .subscribe({
           next: () => alert('Data submitted to server successfully!'),
           error: err => alert('Error submitting data: ' + err.message)
