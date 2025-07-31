@@ -12,7 +12,7 @@
 <div class="employee-form-container" [ngClass]="{ 'dark-theme': isDarkMode }">
   <h1>Employee Details</h1>
  
-  <form [formGroup]="employeeForm">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
  
  
     <!-- Employee Blocks Container -->
@@ -223,16 +223,16 @@
     <!-- Project management office Name -->
     <div class="form-group">
   <label for="projectManagementOfficeName">Project Management Officer Name</label>
-  <input type="text" id="projectManagementOfficeName" formControlName="projectManagementOfficeName" placeholder="Project Management Officer's full name">
+  <input type="text" id="projectManagementOfficeName" formControlName="pmoName" placeholder="Project Management Officer's full name">
  
-  <div *ngIf="employeeForm.get('projectManagementOfficeName')?.touched && employeeForm.get('projectManagementOfficeName')?.invalid" class="error-message">
+  <div *ngIf="employeeForm.get('pmoName')?.touched && employeeForm.get('pmoName')?.invalid" class="error-message">
     <!-- Show 'required' error first -->
-    <ng-container *ngIf="employeeForm.get('projectManagementOfficeName')?.errors?.['required']">
+    <ng-container *ngIf="employeeForm.get('pmoName')?.errors?.['required']">
       Project Management Officer name is required
     </ng-container>
    
     <!-- Show pattern error only if required error is not present -->
-    <ng-container *ngIf="!employeeForm.get('projectManagementOfficeName')?.errors?.['required'] && employeeForm.get('projectManagementOfficeName')?.errors?.['pattern']">
+    <ng-container *ngIf="!employeeForm.get('pmoName')?.errors?.['required'] && employeeForm.get('pmoName')?.errors?.['pattern']">
       Name must not contain numbers or special characters
     </ng-container>
   </div>
@@ -241,16 +241,16 @@
   <!-- Project Management Office Email -->
    <div class="form-group">
   <label for="projectManagementOfficeEmail">Project Management Officer Email</label>
-  <input type="email" id="projectManagementOfficeEmail" formControlName="projectManagementOfficeEmail" placeholder="manager@example.com">
+  <input type="email" id="projectManagementOfficeEmail" formControlName="pmoEmail" placeholder="manager@example.com">
  
-  <div *ngIf="employeeForm.get('projectManagementOfficeEmail')?.touched && employeeForm.get('projectManagementOfficeEmail')?.invalid" class="error-message">
+  <div *ngIf="employeeForm.get('pmoEmail')?.touched && employeeForm.get('pmoEmail')?.invalid" class="error-message">
     <!-- Show 'required' error first -->
-    <ng-container *ngIf="employeeForm.get('projectManagementOfficeEmail')?.errors?.['required']">
+    <ng-container *ngIf="employeeForm.get('pmoEmail')?.errors?.['required']">
       Project Management Officer email is required
     </ng-container>
  
     <!-- Show pattern error if required is not present -->
-    <ng-container *ngIf="!employeeForm.get('projectManagementOfficeEmail')?.errors?.['required'] && employeeForm.get('projectManagementOfficeEmail')?.errors?.['pattern']">
+    <ng-container *ngIf="!employeeForm.get('pmoEmail')?.errors?.['required'] && employeeForm.get('pmoEmail')?.errors?.['pattern']">
       Enter a valid project management officer email ending in .com or .in
     </ng-container>
   </div>
@@ -281,7 +281,7 @@
     Reset
   </button>
  
-  <button mat-raised-button class="fab-btn fab-save" type="submit" matTooltip="Submit" (click)="onSubmit()">
+  <button mat-raised-button class="fab-btn fab-save" type="submit" matTooltip="Submit">
     <mat-icon>save</mat-icon>
     Submit
   </button>
