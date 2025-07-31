@@ -8,18 +8,18 @@
     <span *ngIf="isDarkMode">🌙</span>
   </div>
   </header>
-
+ 
 <div class="employee-form-container" [ngClass]="{ 'dark-theme': isDarkMode }">
   <h1>Employee Details</h1>
-
+ 
   <form [formGroup]="employeeForm">
-
-
+ 
+ 
     <!-- Employee Blocks Container -->
 <div formArrayName="employees">
   <div *ngFor="let employeeGroup of employees.controls; let i = index" [formGroupName]="i" class="employee-section-box">
-
-    <!--Employee Name--> 
+ 
+    <!--Employee Name-->
     <div class="form-group">
       <label for="employeeName">Employee Name</label>
       <input type="text" formControlName="employeeName" placeholder="Enter full name">
@@ -32,8 +32,8 @@
         </ng-container>
       </div>
     </div>
-
-    <!--Employee ID--> 
+ 
+    <!--Employee ID-->
     <div class="form-group">
       <label for="employeeId">Employee ID</label>
       <input type="text" formControlName="employeeId" placeholder="Enter employee ID">
@@ -41,8 +41,8 @@
         Employee ID is required
       </div>
     </div>
-
-    <!--Joining Date--> 
+ 
+    <!--Joining Date-->
     <div class="form-group">
       <label for="joiningDate">Joining Date</label>
       <input type="date" formControlName="joiningDate">
@@ -50,8 +50,8 @@
         Joining date is required
       </div>
     </div>
-
-    <!--Employee Email--> 
+ 
+    <!--Employee Email-->
     <div class="form-group">
       <label for="employeeEmail">Employee Email</label>
       <input type="email" formControlName="employeeEmail" placeholder="example@company.com">
@@ -64,8 +64,8 @@
         </ng-container>
       </div>
     </div>
-
-     <!--Employment Type--> 
+ 
+     <!--Employment Type-->
     <div class="form-group">
       <label for="employmentType">Employment Type</label>
       <select id="employmentType" formControlName="employmentType">
@@ -76,7 +76,7 @@
         Employment type is required
       </div>
     </div>
-
+ 
     <!-- Designation -->
     <div class="form-group" >
      <label for="designation">Designation</label>
@@ -88,7 +88,7 @@
     Designation is required
     </div>
     </div>
-
+ 
     <!--Department-->
     <div class="form-group">
       <label for="department">Department</label>
@@ -100,14 +100,14 @@
         Department is required
       </div>
     </div>
-    <!--Toggle--> 
+    <!--Toggle-->
     <div class="toggle-row">
       <mat-slide-toggle formControlName="noticePeriod"> <span style="color: var(--text-color)">Notice Period</span></mat-slide-toggle>
      <mat-slide-toggle formControlName="probationPeriod"> <span style="color: var(--text-color)">Probation Period</span></mat-slide-toggle>
     </div>
-
-
-
+ 
+ 
+ 
     <!-- Save Button for Individual Entry -->
      <div class="employee-action-buttons" >
     <button mat-raised-button class="fab-btn fab-save"  (click)="saveEmployee(i)" >
@@ -120,142 +120,142 @@
     </div>
   </div>
 </div>
-
+ 
 <!-- Add More Button -->
  <div class="employee-action-buttons">
 <button mat-raised-button class="fab-btn fab-add-more" (click)="addEmployee()">
   <mat-icon>person_add</mat-icon> Add More
 </button>
 </div>
-
+ 
 <!-- Project Name -->
     <div class="form-group">
   <label for="projectName">Project Name</label>
   <input type="text" id="projectName" formControlName="projectName" placeholder="Project name">
-  
+ 
   <div *ngIf="employeeForm.get('projectName')?.touched && employeeForm.get('projectName')?.invalid" class="error-message">
     <!-- Show 'required' error first -->
     <ng-container *ngIf="employeeForm.get('projectName')?.errors?.['required']">
       Project name is required
     </ng-container>
-    
+   
     <!-- Show pattern error only if required error is not present -->
     <ng-container *ngIf="!employeeForm.get('projectName')?.errors?.['required'] && employeeForm.get('projectName')?.errors?.['pattern']">
       Name must not contain numbers or special characters
     </ng-container>
   </div>
 </div>
-
-
+ 
+ 
     <!-- Project Manager Name -->
     <div class="form-group">
   <label for="projectManagerName">Project Manager Name</label>
   <input type="text" id="projectManagerName" formControlName="projectManagerName" placeholder="Manager's full name">
-  
+ 
   <div *ngIf="employeeForm.get('projectManagerName')?.touched && employeeForm.get('projectManagerName')?.invalid" class="error-message">
     <!-- Show 'required' error first -->
     <ng-container *ngIf="employeeForm.get('projectManagerName')?.errors?.['required']">
       Project manager name is required
     </ng-container>
-    
+   
     <!-- Show pattern error only if required error is not present -->
     <ng-container *ngIf="!employeeForm.get('projectManagerName')?.errors?.['required'] && employeeForm.get('projectManagerName')?.errors?.['pattern']">
       Name must not contain numbers or special characters
     </ng-container>
   </div>
 </div>
-
-
+ 
+ 
     <!-- Project Manager Email -->
    <div class="form-group">
   <label for="projectManagerEmail">Project Manager Email</label>
   <input type="email" id="projectManagerEmail" formControlName="projectManagerEmail" placeholder="manager@example.com">
-  
+ 
   <div *ngIf="employeeForm.get('projectManagerEmail')?.touched && employeeForm.get('projectManagerEmail')?.invalid" class="error-message">
     <!-- Show 'required' error first -->
     <ng-container *ngIf="employeeForm.get('projectManagerEmail')?.errors?.['required']">
       Manager email is required
     </ng-container>
-
+ 
     <!-- Show pattern error if required is not present -->
     <ng-container *ngIf="!employeeForm.get('projectManagerEmail')?.errors?.['required'] && employeeForm.get('projectManagerEmail')?.errors?.['pattern']">
       Enter a valid manager email ending in .com or .in
     </ng-container>
   </div>
-</div> 
-
+</div>
+ 
 <!-- Team Lead Name -->
     <div class="form-group">
   <label for="teamLeadName">Team Lead Name</label>
   <input type="text" id="teamLeadName" formControlName="teamLeadName" placeholder="Team Lead's full name">
-  
+ 
   <div *ngIf="employeeForm.get('teamLeadName')?.touched && employeeForm.get('teamLeadName')?.invalid" class="error-message">
     <!-- Show 'required' error first -->
     <ng-container *ngIf="employeeForm.get('teamLeadName')?.errors?.['required']">
       Team Lead name is required
     </ng-container>
-    
+   
     <!-- Show pattern error only if required error is not present -->
     <ng-container *ngIf="!employeeForm.get('teamLeadName')?.errors?.['required'] && employeeForm.get('teamLeadName')?.errors?.['pattern']">
       Name must not contain numbers or special characters
     </ng-container>
   </div>
 </div>
-
+ 
   <!-- Team Lead Email -->
    <div class="form-group">
   <label for="teamLeadEmail">Team Lead Email</label>
   <input type="email" id="teamLeadEmail" formControlName="teamLeadEmail" placeholder="teamlead@example.com">
-  
+ 
   <div *ngIf="employeeForm.get('teamLeadEmail')?.touched && employeeForm.get('teamLeadEmail')?.invalid" class="error-message">
     <!-- Show 'required' error first -->
     <ng-container *ngIf="employeeForm.get('teamLeadEmail')?.errors?.['required']">
       Team Lead email is required
     </ng-container>
-
+ 
     <!-- Show pattern error if required is not present -->
     <ng-container *ngIf="!employeeForm.get('teamLeadEmail')?.errors?.['required'] && employeeForm.get('teamLeadEmail')?.errors?.['pattern']">
       Enter a valid team lead email ending in .com or .in
     </ng-container>
   </div>
-</div> 
-
+</div>
+ 
     <!-- Project management office Name -->
     <div class="form-group">
   <label for="projectManagementOfficeName">Project Management Officer Name</label>
   <input type="text" id="projectManagementOfficeName" formControlName="projectManagementOfficeName" placeholder="Project Management Officer's full name">
-  
+ 
   <div *ngIf="employeeForm.get('projectManagementOfficeName')?.touched && employeeForm.get('projectManagementOfficeName')?.invalid" class="error-message">
     <!-- Show 'required' error first -->
     <ng-container *ngIf="employeeForm.get('projectManagementOfficeName')?.errors?.['required']">
       Project Management Officer name is required
     </ng-container>
-    
+   
     <!-- Show pattern error only if required error is not present -->
     <ng-container *ngIf="!employeeForm.get('projectManagementOfficeName')?.errors?.['required'] && employeeForm.get('projectManagementOfficeName')?.errors?.['pattern']">
       Name must not contain numbers or special characters
     </ng-container>
   </div>
 </div>
-
+ 
   <!-- Project Management Office Email -->
    <div class="form-group">
   <label for="projectManagementOfficeEmail">Project Management Officer Email</label>
   <input type="email" id="projectManagementOfficeEmail" formControlName="projectManagementOfficeEmail" placeholder="manager@example.com">
-  
+ 
   <div *ngIf="employeeForm.get('projectManagementOfficeEmail')?.touched && employeeForm.get('projectManagementOfficeEmail')?.invalid" class="error-message">
     <!-- Show 'required' error first -->
     <ng-container *ngIf="employeeForm.get('projectManagementOfficeEmail')?.errors?.['required']">
       Project Management Officer email is required
     </ng-container>
-
+ 
     <!-- Show pattern error if required is not present -->
     <ng-container *ngIf="!employeeForm.get('projectManagementOfficeEmail')?.errors?.['required'] && employeeForm.get('projectManagementOfficeEmail')?.errors?.['pattern']">
       Enter a valid project management officer email ending in .com or .in
     </ng-container>
   </div>
-</div> 
-
+</div>
+ 
     <!-- Project Start Date -->
     <div class="form-group">
       <label for="projectStartDate">Project Start Date</label>
@@ -264,7 +264,7 @@
         Project start date is required
       </div>
     </div>
-
+ 
     <!-- Project End Date -->
     <div class="form-group">
       <label for="projectEndDate">Project End Date</label>
@@ -273,23 +273,23 @@
         Project end date is required
       </div>
     </div>
-
-
+ 
+ 
 <div class="fab-form-actions">
   <button mat-raised-button class="fab-btn fab-reset" (click)="onReset()" matTooltip="Reset">
     <mat-icon>refresh</mat-icon>
     Reset
   </button>
-
+ 
   <button mat-raised-button class="fab-btn fab-save" type="submit" matTooltip="Submit" (click)="onSubmit()">
     <mat-icon>save</mat-icon>
     Submit
   </button>
-
+ 
   <button mat-raised-button class="fab-btn fab-exit" (click)="onExit()" matTooltip="Exit">
     <mat-icon>exit_to_app</mat-icon>
     Exit
   </button>
-</div>   
+</div>  
   </form>
 </div>
