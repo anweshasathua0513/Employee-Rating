@@ -44,12 +44,13 @@ export class EmployeeComponent {
   designation = ['Intern','Junior Developer','Software Engineer','Senior Software Engineer','Team Lead','Project Manager','QA Analyst','QA Lead','DevOps Engineer','HR Executive','HR Manager']
   departments = ['IT', 'HR', 'Finance', 'Operations', 'Marketing'];
   employmentTypes = ['Full-time', 'Part-time', 'Contract', 'Temporary'];
+  noticePeriod: [''];
+  probationPeriod: [''];
 
   constructor(private fb: FormBuilder, private http: HttpClient, private renderer: Renderer2, private cdRef: ChangeDetectorRef ) {
     this.employeeForm = this.fb.group({
       employees: this.fb.array([this.createEmployeeGroup()]),
-      noticePeriod: [false],
-      probationPeriod: [false],
+      
       projectName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       projectManagerName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       projectManagerEmail: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/)]],
@@ -85,7 +86,9 @@ export class EmployeeComponent {
       ]],
       department: ['', Validators.required],
        employmentType: ['', Validators.required],
-       designation: ['', Validators.required]
+       designation: ['', Validators.required],
+      noticePeriod: ['', Validators.required],
+      probationPeriod: ['', Validators.required],
       
 
     });
