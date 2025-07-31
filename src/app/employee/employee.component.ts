@@ -87,8 +87,8 @@ export class EmployeeComponent {
       department: ['', Validators.required],
        employmentType: ['', Validators.required],
        designation: ['', Validators.required],
-       noticePeriod: ['', Validators.required ],
-       probationPeriod: ['', Validators.required],
+       noticePeriod: [''],
+       probationPeriod: [''],
       
 
     });
