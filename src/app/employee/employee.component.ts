@@ -10,7 +10,7 @@ import { HttpClient, provideHttpClient } from '@angular/common/http'; // ✅ Imp
 import { Renderer2 } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { ChangeDetectorRef } from '@angular/core';
- 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -40,20 +40,17 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class EmployeeComponent {
   employeeForm: FormGroup;
-  isDarkMode = false;
+  isDarkMode = false; 
   designation = ['Intern','Junior Developer','Software Engineer','Senior Software Engineer','Team Lead','Project Manager','QA Analyst','QA Lead','DevOps Engineer','HR Executive','HR Manager']
   departments = ['IT', 'HR', 'Finance', 'Operations', 'Marketing'];
   employmentTypes = ['Full-time', 'Part-time', 'Contract', 'Temporary'];
- 
- 
+  noticePeriod!: [''];
+  probationPeriod!: [''];
+
   constructor(private fb: FormBuilder, private http: HttpClient, private renderer: Renderer2, private cdRef: ChangeDetectorRef ) {
     this.employeeForm = this.fb.group({
       employees: this.fb.array([this.createEmployeeGroup()]),
-      // ❌ OLD IMPLEMENTATION: noticePeriod and probationPeriod were at form level
-      // noticePeriod: [''],
-      // probationPeriod: [''],
-      // ✅ NEW IMPLEMENTATION: Removed from form level because these should be per-employee fields
-      // WHY CHANGED: Backend expects noticePeriod and probationPeriod for each individual employee, not at the form level
+      
       projectName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       projectManagerName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       projectManagerEmail: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/)]],
@@ -63,19 +60,20 @@ export class EmployeeComponent {
       pmoEmail: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/)]],
       projectStartDate: ['', Validators.required],
       projectEndDate: ['', Validators.required],
- 
- 
- 
+      
+     
+     
+
     });
   }
- 
- 
- 
+
+  
+
   get employees(): FormArray {
     return this.employeeForm.get('employees') as FormArray;
   }
- 
- 
+
+
   createEmployeeGroup(): FormGroup {
     return this.fb.group({
       employeeName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
@@ -89,40 +87,21 @@ export class EmployeeComponent {
       department: ['', Validators.required],
        employmentType: ['', Validators.required],
        designation: ['', Validators.required],
-      // ❌ OLD IMPLEMENTATION: noticePeriod and probationPeriod were strings with validators
-      // noticePeriod: ['', Validators.required],
-      // probationPeriod: ['', Validators.required],
-      // ✅ NEW IMPLEMENTATION: Changed to boolean values with default false
-      // WHY CHANGED: Toggle switches should send boolean values (true/false) to backend, not strings
-      noticePeriod: [false], // Default to false, will be updated by toggle events
-      probationPeriod: [false], // Default to false, will be updated by toggle events
- 
- 
+       noticePeriod: ['', Validators.required ],
+       probationPeriod: ['', Validators.required],
+      
+
     });
   }
- 
-  // ✅ NEW IMPLEMENTATION: Added toggle event handlers to capture toggle switch states
-  // WHY ADDED: These methods will update the form values when toggle switches are clicked
-  onNoticePeriodToggle(index: number, event: any): void {
-    const employeeGroup = this.employees.at(index) as FormGroup;
-    employeeGroup.patchValue({ noticePeriod: event.checked });
-    console.log(`Employee ${index + 1} notice period: ${event.checked}`); // Debug log
-  }
- 
-  onProbationPeriodToggle(index: number, event: any): void {
-    const employeeGroup = this.employees.at(index) as FormGroup;
-    employeeGroup.patchValue({ probationPeriod: event.checked });
-    console.log(`Employee ${index + 1} probation period: ${event.checked}`); // Debug log
-  }
- 
+
   scrollToFirstError(): void {
   // First, check for any invalid control inside the employees array
   const employeeContainers = document.querySelectorAll('.employee-section-box');
- 
+
   for (let i = 0; i < employeeContainers.length; i++) {
     const container = employeeContainers[i];
     const invalidControl = container.querySelector('.ng-invalid') as HTMLElement | null;
- 
+
     if (invalidControl) {
       setTimeout(() => {
         invalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -131,10 +110,10 @@ export class EmployeeComponent {
       return;
     }
   }
- 
+
   // If none found in employees, fallback to the rest of the form
   const firstInvalid = document.querySelector('.ng-invalid') as HTMLElement | null;
- 
+
   if (firstInvalid) {
     setTimeout(() => {
       firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -142,33 +121,35 @@ export class EmployeeComponent {
     }, 0);
   }
 }
- 
- 
+
+
+
   addEmployee() {
     const lastGroup = this.employees.at(this.employees.length - 1) as FormGroup;
     lastGroup.markAllAsTouched();
- 
+
     if (lastGroup.invalid) {
       this.scrollToFirstError();
       return;
     }
- 
+
     this.employees.push(this.createEmployeeGroup());
- 
+
     setTimeout(() => {
     const selects = document.querySelectorAll('select');
     selects.forEach((el: any) => {
       el.style.display = 'none';
-      void el.offsetHeight;
+      void el.offsetHeight; 
       el.style.display = '';
     });
- 
+
     this.cdRef.detectChanges();
   }, 100);
- 
+
   }
- 
- 
+
+
+
   deleteEmployee(index: number): void {
     if (this.employees.length > 1) {
       this.employees.removeAt(index);
@@ -176,18 +157,20 @@ export class EmployeeComponent {
       alert('At least one employee section is required.');
     }
   }
- 
+
   saveEmployee(index: number): void{
     const employeeGroup = this.employees.at(index) as FormGroup;
+    
     Object.keys(employeeGroup.controls).forEach(controlName => {
     const control = employeeGroup.get(controlName);
     control?.markAsTouched();
   });
- 
- 
+     
+    
+
       const containers = document.querySelectorAll('.employee-section-box');
       const Container = containers[index] as HTMLElement | null;
- 
+
      if (employeeGroup.invalid) {
      if (Container) {
       const firstInvalid = Container.querySelector('.ng-invalid') as HTMLElement | null;
@@ -203,31 +186,28 @@ export class EmployeeComponent {
   }
     return;
     }
- 
-   
+
+    
   const employeeData = employeeGroup.value;
-  // ✅ NEW IMPLEMENTATION: Added debug logging to see what data is being sent
-  // WHY ADDED: To verify that noticePeriod and probationPeriod values are correct before sending
-  console.log('Saving employee data:', employeeData);
- 
+
     this.http.post('https://docker-employee-rating-4.onrender.com/api/save', employeeData)
       .subscribe({
         next: () => alert(`Employee ${index + 1} saved successfully!`),
       error: err => alert('Error saving employee: ' + err.message)
       });
   }
- 
- 
- 
+
+  
+
   onSubmit() {
     this.employeeForm.markAllAsTouched();
     this.employees.controls.forEach(group => group.markAllAsTouched());
- 
+
     if (this.employeeForm.valid) {
       console.log('Form submitted:', this.employeeForm.value);
       alert('Form submitted successfully!');
- 
-      this.http.post('https://docker-employee-rating-4.onrender.com/api/save', this.employeeForm.value)
+
+      this.http.post('https://docker-employee-rating-4.onrender.com/api/save', this.employeeForm.value) 
         .subscribe({
           next: () => alert('Data submitted to server successfully!'),
           error: err => alert('Error submitting data: ' + err.message)
@@ -236,43 +216,44 @@ export class EmployeeComponent {
       this.scrollToFirstError();
     }
   }
- 
+
   onReset(): void {
     location.reload();
     this.employeeForm.reset();
     this.employees.clear();
+    
   }
- 
+
   onExit() {
     alert('Exit clicked');
-  }
- 
+  }
+
   toggleTheme(): void {
     this.isDarkMode = !this.isDarkMode;
    const root = document.documentElement;
- 
+
     if (this.isDarkMode) {
    root.classList.add('dark-mode', 'dark-theme');
    localStorage.setItem('theme', 'dark');
-  }
+  } 
   else {
     root.classList.remove('dark-mode', 'dark-theme');
     localStorage.setItem('theme', 'light');
   }
- 
+
   setTimeout(() => {
     const selects = document.querySelectorAll('select');
     selects.forEach((el: any) => {
       el.style.display = 'none';
-      void el.offsetHeight;
+      void el.offsetHeight; 
       el.style.display = '';
     });
- 
-    this.cdRef.detectChanges();
+
+    this.cdRef.detectChanges(); 
   }, 100);
 }
- 
- 
+
+
 ngOnInit() {
   const themePref = localStorage.getItem('theme');
   if (themePref === 'dark') {
@@ -282,12 +263,16 @@ ngOnInit() {
     this.isDarkMode = false;
     document.documentElement.classList.remove('dark-mode', 'dark-theme');
   }
- 
-setTimeout(() => {
+
+ setTimeout(() => {
     this.cdRef.detectChanges();
   }, 0);
- 
+
 }
- 
+
  
   }
+
+  
+
+
