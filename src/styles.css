@@ -78,3 +78,59 @@ body, html {
 .dark-mode ::ng-deep .mat-slide-toggle-thumb {
   background-color: white !important;
 }
+
+::ng-deep .mat-calendar {
+  border-radius: 12px;
+  background-color: var(--bg-color);
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+}
+
+::ng-deep .mat-calendar-table {
+  border-collapse: separate !important;
+  border-spacing: 6px;
+}
+
+::ng-deep .mat-calendar-body-selected {
+  background-color: #e65100 !important; /* purple circle */
+  color: var(--text-color) !important;
+}
+
+::ng-deep .mat-calendar-body-in-range::before {
+  background: #f85726b8 !important; /* lighter purple for range */
+  border-radius: 0 !important;
+}
+
+::ng-deep .mat-calendar-body-in-range {
+  background-color: #f85726b8 !important; /* light purple */
+  color: var(--text-color) !important;
+}
+
+::ng-deep .mat-calendar-body-range-start,
+::ng-deep .mat-calendar-body-range-end {
+  background-color: #e65100 !important; /* dark purple for edge */
+  color: var(--text-color) !important;
+  border-radius: 50% !important;
+  z-index: 1;
+}
+
+::ng-deep .mat-calendar-body-cell {
+  border-radius: 50% !important;
+}
+
+::ng-deep .mat-calendar-controls {
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+::ng-deep .mat-calendar-period-button {
+  color: #e65100 !important;
+}
+
+::ng-deep .mat-calendar-next-button,
+::ng-deep .mat-calendar-previous-button {
+  color: #e65100 !important;
+}
+
+
+
