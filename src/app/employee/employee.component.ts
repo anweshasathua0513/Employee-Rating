@@ -141,34 +141,8 @@ export class EmployeeComponent {
       probationPeriod: [false]
     });
   }
-
-  // Add Row
-  // addEmployeeRow(): void {
-
-  //   this.employeeList.push(this.createEmployeeGroup());
-  // this.setAllRowsInitiallyEditable();
-  // this.cdRef.detectChanges();
-
-  // setTimeout(() => {
-  //   const rows = document.querySelectorAll('table tr');
-  //   if (rows.length > 0) {
-  //     rows[rows.length - 1].scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // }, 0);
-  //   // const index = this.employeeList.length;
-  //   // this.employeeList.push(this.createEmployeeGroup());
-  //   // this.editRowMap[index] = true; // New row in edit mode
-
-  //   // this.cdRef.detectChanges();
-  //   // setTimeout(() => {
-  //   //   const rows = document.querySelectorAll('table tr');
-  //   //   if (rows.length > 0) {
-  //   //     rows[rows.length - 1].scrollIntoView({ behavior: 'smooth' });
-  //   //   }
-  //   // }, 100);
-  // }
-
-  addEmployeeRow(): void {
+  
+addEmployeeRow(): void {
   const index = this.employeeList.length;
 
   this.employeeList.push(this.createEmployeeGroup());
