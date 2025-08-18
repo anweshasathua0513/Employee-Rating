@@ -3,6 +3,7 @@
   --bg-color: #f9f9f9;
   --text-color: #000000;
   --input-bg-color: #ffffff;
+  --icon-color: #000000;
 }
 
 .dark-theme {
@@ -10,6 +11,7 @@
   --bg-color: #1e1e1e;
   --text-color: #ffffff;
   --input-bg-color: #2a2a2a;
+  --icon-color: #ffffff;
 }
 
 :host(.dark-theme) ::ng-deep .mat-slide-toggle-label-content {
@@ -123,8 +125,9 @@ body.dark-theme,
   box-shadow: 0 10px 7px #FF6700;
 }
 
-
-
+/* .mat-datepicker-toggle .mat-icon {
+  color: var(--icon-color);
+} */
 
 h1 {
   color: var(--text-color);
@@ -396,7 +399,7 @@ input:focus, select:focus {
   }
 
   .mat-date-range-input-inner {
-    background-color: var(--bg-color); 
+    background-color: var(--icon-color); 
     border-radius: 8px;
     padding: 4px 8px;
   }
@@ -576,6 +579,17 @@ input[matEndDate] {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+.full-width-table td input,
+.full-width-table td select,
+.full-width-table td mat-form-field {
+  width: 155px; 
+  min-width: 155px;
+  max-width: 155px;
+  box-sizing: border-box;
+}
+.full-width-table td mat-select {
+  width: 155px !important;
+}
 
 .full-width-table input:focus, 
 .full-width-table select:focus {
@@ -624,9 +638,7 @@ mat-form-field {
   color: var(--text-color) !important;
 } */
 
-.dark-theme ::ng-deep button.mat-icon-button .mat-datepicker-toggle-default-icon path {
-  fill: white !important;
-}
+
 .dark-theme ::ng-deep .mat-select-arrow {
   color: var(--text-color) !important;
 }
@@ -721,20 +733,34 @@ input:focus, select:focus {
   opacity: 0.85;
 }
 
-
-
-
-
-
-/*::ng-deep .mat-slide-toggle.mat-slide-toggle-label-content {
-  color: var(--text-color) !important;
+::ng-deep .mat-datepicker-toggle .mat-icon,
+::ng-deep .mat-datepicker-toggle-default-icon path {
+  fill: var(--icon-color) !important; /* For inline SVGs */
+  color: var(--icon-color) !important; /* For font-based icons */
 }
 
-
-::ng-deep .mat-slide-toggle.mat-checked.mat-slide-toggle-bar {
-  background-color: #ff9800 !important;
+/* Light mode */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0); /* Black icon */
+  color: var(--icon-color); 
 }
 
-::ng-deep .mat-slide-toggle-thumb {
-  background-color: var(--bg-color) !important;
-}*/
+/* Dark mode */
+.dark-theme input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* White icon */
+  color: var(--icon-color);
+}
+
+td .action-buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 2px; /* space between buttons */
+  }
+td .action-buttons button {
+  cursor: pointer;
+  min-width:auto;
+  margin: 0;
+}
+.action-button mat-icon {
+  font-size: 18px;
+}
