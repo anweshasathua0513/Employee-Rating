@@ -189,7 +189,7 @@
 
       <!-- Employee ID -->
       <ng-container matColumnDef="employeeId">
-        <th mat-header-cell *matHeaderCellDef>Employee ID</th>
+        <th mat-header-cell *matHeaderCellDef>👨‍💼Employee ID</th>
         <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
 
           <ng-container *ngIf="editRowMap[i]; else readOnlyId">
@@ -206,7 +206,7 @@
 
       <!-- Employee Name -->
       <ng-container matColumnDef="employeeName">
-        <th mat-header-cell *matHeaderCellDef>Employee Name</th>
+        <th mat-header-cell *matHeaderCellDef>👨‍💼Employee Name</th>
         <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
 
           <ng-container *ngIf="editRowMap[i]; else readOnlyName">
@@ -227,7 +227,7 @@
 
       <!-- Joining Date -->
       <ng-container matColumnDef="joiningDate">
-        <th mat-header-cell *matHeaderCellDef>Joining Date</th>
+        <th mat-header-cell *matHeaderCellDef>📅Joining Date</th>
         <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
 
           <ng-container *ngIf="editRowMap[i]; else readOnlyDate">
@@ -243,7 +243,7 @@
 
       <!-- Email -->
       <ng-container matColumnDef="employeeEmail">
-        <th mat-header-cell *matHeaderCellDef>Employee Email</th>
+        <th mat-header-cell *matHeaderCellDef>📧Employee Email</th>
         <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
 
           <ng-container *ngIf="editRowMap[i]; else readOnlyEmail">
@@ -264,7 +264,7 @@
 
       <!-- Employment Type -->
       <ng-container matColumnDef="employmentType">
-        <th mat-header-cell *matHeaderCellDef>Employment Type</th>
+        <th mat-header-cell *matHeaderCellDef>📁Job Type</th>
         <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
 
           <ng-container *ngIf="editRowMap[i]; else readOnlyType">
@@ -283,7 +283,7 @@
 
       <!-- Designation -->
       <ng-container matColumnDef="designation">
-        <th mat-header-cell *matHeaderCellDef>Designation</th>
+        <th mat-header-cell *matHeaderCellDef>📁Designation</th>
         <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
 
           <ng-container *ngIf="editRowMap[i]; else readOnlyDesignation">
@@ -302,7 +302,7 @@
 
       <!-- Department -->
       <ng-container matColumnDef="department">
-        <th mat-header-cell *matHeaderCellDef>Department</th>
+        <th mat-header-cell *matHeaderCellDef>📁Department</th>
         <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
 
           <ng-container *ngIf="editRowMap[i]; else readOnlyDepartment">
@@ -355,7 +355,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let row; let i = index">
-
+        <div class="action-button">
           <ng-container *ngIf="editRowMap[i]; else viewActions">
             <button type="button" mat-icon-button color="primary" (click)="saveRow(i)">
               <mat-icon>check</mat-icon>
@@ -363,17 +363,17 @@
             <button type="button" mat-icon-button color="warn" (click)="deleteEmployee(i)">
               <mat-icon>delete</mat-icon>
             </button>
-          </ng-container>
-
+            </ng-container>
+          
           <ng-template #viewActions>
             <button type="button" mat-icon-button (click)="editRow(i)">
               <mat-icon>edit</mat-icon>
             </button>
             <button type="button" mat-icon-button color="warn" (click)="deleteEmployee(i)">
               <mat-icon>delete</mat-icon>
-            </button>
+              </button>
           </ng-template>
-
+        </div>
         </td>
       </ng-container>
 
