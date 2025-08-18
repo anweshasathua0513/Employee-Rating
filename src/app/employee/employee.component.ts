@@ -1,297 +1,766 @@
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormsModule } from '@angular/forms';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { provideHttpClient,HttpClient } from '@angular/common/http';
-import { Component, Renderer2, ChangeDetectorRef } from '@angular/core';
-import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+:root {
+  --primary-color: #ffffff;
+  --bg-color: #f9f9f9;
+  --text-color: #000000;
+  --input-bg-color: #ffffff;
+  --icon-color: #000000;
+}
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSlideToggleModule,
-    MatTooltipModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatNativeDateModule,
-    MatCheckboxModule,
-    MatTableModule
-  ],
-  providers: [MatDatepickerModule],
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css'],
-  animations: [
-    trigger('fabAnimation', [
-      transition(':enter', [
-        query('.fab-btn', [
-          style({ opacity: 0 }),
-          stagger(100, [
-            animate('300ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
-          ])
-        ])
-      ])
-    ])
-  ]
-})
-export class EmployeeComponent {
-  isDarkMode = false;
+.dark-theme {
+  --primary-color: #ffffff;
+  --bg-color: #1e1e1e;
+  --text-color: #ffffff;
+  --input-bg-color: #2a2a2a;
+  --icon-color: #ffffff;
+}
 
-  designation = [
-    'Intern','Junior Developer','Software Engineer','Senior Software Engineer',
-    'Team Lead','Project Manager','QA Analyst','QA Lead','DevOps Engineer','HR Executive','HR Manager'
-  ];
+:host(.dark-theme) ::ng-deep .mat-slide-toggle-label-content {
+  color: var(--text-color) !important;
+}
+
+:host(.dark-theme) ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: #ff9800 !important;
+}
+
+:host(.dark-theme) ::ng-deep .mat-slide-toggle-thumb {
+  background-color: white !important;
+}
+
+:host-context(.light-theme) ::ng-deep .mat-slide-toggle-label-content {
+  color: var(--text-color);
+}
+
+
+body.dark-theme,
+.employee-form-container.dark-theme {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+
+.app-header {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  box-shadow: 0 2px 4px #FF6700;
+}
+
+
+.theme-toggle-icon {
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+ 
+}
+
+.theme-toggle-icon:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 6px orange) drop-shadow(0 0 12px orange);
+}
+
+
+.logo {
+  height: 130px;
+  display: flex;
+  margin-right: 40px;
+  padding: 0%;
+  margin-top: 20px;
+}
+
+.logo img {
+  height: 180px;     
+  max-height: 100%; 
+  width: auto;      
+  object-fit: contain;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px; 
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.mat-slide-toggle-label-content{
+  margin-top: 10px;
+  color: var(--text-color) !important;
+  font-weight: 500;
+}
+
+.mat-slide-toggle-label-content:hover {
+  color: #ff9800 !important;
+}
+
+.dark-theme ::ng-deep .mat-slide-toggle-label-content {
+  color: var(--text-color) !important;
+}
+
+
+.theme-toggle {
+ margin-left: auto;
+  margin-right: 10px;
+  color: var(--text-color);
+  background: transparent;
+  box-shadow: var(--bg-color);
+}
+
+
+.employee-form-container {
+  margin-bottom: auto;
+  max-width: 100%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  box-shadow: 0 10px 7px #FF6700;
+}
+
+/* .mat-datepicker-toggle .mat-icon {
+  color: var(--icon-color);
+} */
+
+h1 {
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.employee-section-box {
+  border: 1px solid #ff660096;
+  padding: 45px;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.employee-action-buttons {
+  display: flex;
+  justify-content: flex-end; 
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.fab-btn.fab-add-more {
+  margin-top: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+input, select {
+  color: var(--text-color);
+  background-color: var(--input-bg-color, white);
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--text-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+input::placeholder,
+select::placeholder {
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0);
+}
+
+
+.dark-theme input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+
+select option  {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.error-message {
+  color: rgb(231, 45, 45);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.submit-button {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.fab-actions-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.fab-form-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.fab-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius:8px ;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-color);
+  border: none;
+  text-transform: capitalize;
   
-  departments = ['IT', 'HR', 'Finance', 'Operations', 'Marketing'];
-  employmentTypes = ['Full-time', 'Part-time', 'Contract', 'Temporary'];
-
-  displayedColumns = [
-    'employeeId',
-    'employeeName',
-    'joiningDate',
-    'employeeEmail',
-    'employmentType',
-    'designation',
-    'department',
-    'noticePeriod',
-    'probationPeriod',
-    'actions'
-  ];
-
-  employeeForm: FormGroup;
-  editRowMap: { [index: number]: boolean } = {};
-  setAllRowsInitiallyEditable: any;
-  dataSource = new MatTableDataSource<FormGroup>();
-
-  constructor(
-    private fb: FormBuilder,
-    private http: HttpClient,
-    private renderer: Renderer2,
-    private cdRef: ChangeDetectorRef
-  ) {
-    this.employeeForm = this.fb.group({
-      projectName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
-      projectManagerName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
-      projectManagerEmail: ['', [
-        Validators.required,
-        Validators.email,
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/)
-      ]],
-      teamLeadName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
-      teamLeadEmail: ['', [
-        Validators.required,
-        Validators.email,
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/)
-      ]],
-      pmoName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
-      pmoEmail: ['', [
-        Validators.required,
-        Validators.email,
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/)
-      ]],
-        projectStartDate: ['', Validators.required],
-        projectEndDate: ['', Validators.required],
-      employeeList: this.fb.array([this.createEmployeeGroup()])
-    });
-
-    // Initially set first row editable
-    this.editRowMap[0] = true;
-  }
-
-  // Getters
-  get employeeList(): FormArray {
-    return this.employeeForm.get('employeeList') as FormArray;
-  }
-
-  get projectDatesGroup(): FormGroup {
-    return this.employeeForm.get('projectDates') as FormGroup;
-  }
-
-  // Create Employee FormGroup
-  createEmployeeGroup(): FormGroup {
-    return this.fb.group({
-      employeeId: ['', Validators.required],
-      employeeName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
-      joiningDate: ['', Validators.required],
-      employeeEmail: ['', [
-        Validators.required,
-        Validators.email,
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/)
-      ]],
-      department: ['', Validators.required],
-      employmentType: ['', Validators.required],
-      designation: ['', Validators.required],
-      noticePeriod: [false],
-      probationPeriod: [false]
-    });
-  }
-
-  // Add Row
-  // addEmployeeRow(): void {
-
-  //   this.employeeList.push(this.createEmployeeGroup());
-  // this.setAllRowsInitiallyEditable();
-  // this.cdRef.detectChanges();
-
-  // setTimeout(() => {
-  //   const rows = document.querySelectorAll('table tr');
-  //   if (rows.length > 0) {
-  //     rows[rows.length - 1].scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // }, 0);
-  //   // const index = this.employeeList.length;
-  //   // this.employeeList.push(this.createEmployeeGroup());
-  //   // this.editRowMap[index] = true; // New row in edit mode
-
-  //   // this.cdRef.detectChanges();
-  //   // setTimeout(() => {
-  //   //   const rows = document.querySelectorAll('table tr');
-  //   //   if (rows.length > 0) {
-  //   //     rows[rows.length - 1].scrollIntoView({ behavior: 'smooth' });
-  //   //   }
-  //   // }, 100);
-  // }
-
-  addEmployeeRow(): void {
-  const index = this.employeeList.length;
-
-  this.employeeList.push(this.createEmployeeGroup());
-
-  // Put the new row into edit mode
-  this.editRowMap[index] = true;
-
-  // Update the Material table's datasource
-  this.refreshTable();
-
-  // Optional: scroll to the new row
-  setTimeout(() => {
-    const rows = document.querySelectorAll('table tr');
-    if (rows.length > 0) {
-      rows[rows.length - 1].scrollIntoView({ behavior: 'smooth' });
-    }
-  }, 0);
-}
-  private refreshTable(): void {
-      this.dataSource.data = this.employeeList.controls as FormGroup[];
-      this.cdRef.detectChanges();
-    }
-
-  // Edit Row
-  editRow(index: number) {
-    this.editRowMap[index] = true;
-  }
-
-  // Save Row
-  saveRow(index: number) {
-    if (this.employeeList.at(index).valid) {
-      this.editRowMap[index] = false;
-    } else {
-      this.employeeList.at(index).markAllAsTouched();
-    }
-  }
-
-  // Delete Row
-  deleteEmployee(index: number): void {
-  if (this.employeeList.length > 1) {
-    this.employeeList.removeAt(index);
-    const updatedMap: { [key: number]: boolean } = {};
-    this.employeeList.controls.forEach((_, i) => {
-      updatedMap[i] = this.editRowMap[i] || false;
-    });
-    this.editRowMap = updatedMap;
-    this.refreshTable();
-
-  } else {
-    alert('At least one employee record is required.');
-  }
 }
 
 
-  // Submit
-  onSubmit() {
-    this.employeeForm.markAllAsTouched();
-    this.employeeList.controls.forEach(group => group.markAllAsTouched());
-    if (this.employeeForm.valid) {
-      const formValue = { ...this.employeeForm.value };
-      formValue.employees = formValue.employeeList.map((emp: any) => ({
-        ...emp,
-        probationaPeriod: emp.probationPeriod
-      }));
-      this.http.post('https://docker-employee-rating-4.onrender.com/api/save', formValue)
-        .subscribe({
-          next: () => alert('Data submitted to server successfully!'),
-          error: err => alert('Error submitting data: ' + err.message)
-        });
-    } else {
-      this.scrollToFirstError();
-    }
+.mat-icon {
+  font-family: 'Material Icons' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  display: flex;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+
+.fab-reset {
+  background: linear-gradient(45deg, #ff6f61, #d32f2f);
+}
+
+.fab-save {
+  background: linear-gradient(45deg, #4caf50, #2e7d32);
+}
+
+.fab-exit {
+  background: linear-gradient(45deg, #42a5f5, #1e88e5);
+}
+
+.fab-add-more {
+  background: linear-gradient(45deg, #ffa726, #fb8c00);
+}  
+
+.project-section-wrapper {
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.project-section {
+  background-color: var(--bg-color);
+  border: 2px solid #ff6700;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px orange;
+}
+
+.project-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  flex: 1 1 10%;
+  min-width: 200px; 
+}
+
+.form-group label {
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 0.3rem;
+}
+
+.form-group input,
+.form-group select {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid orange;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.project-add-btn {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.project-add-btn button {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 8px orange;
+}
+
+
+@media (max-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .fab-form-actions {
+    flex-direction: column;
+    gap: 12px;
   }
 
-  // Reset
-  onReset(): void {
-    location.reload();
-    this.employeeForm.reset();
-    this.employeeList.clear();
+  .fab-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.date-picker-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  gap: 10px;
+}
+
+.date-range-field {
+  width: 100%;
+
+  input {
+    color: var(--text-color); 
   }
 
-  // Exit
-  onExit() {
-    alert('Exit clicked');
+  .mat-date-range-input-inner {
+    background-color: var(--icon-color); 
+    border-radius: 8px;
+    padding: 4px 8px;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+/* mat-date-range-input.full-width{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-color);
+  border: orange 1.5px solid;
+  border-radius: 8px;
+  padding: 7px;
+  color: var(--text-color);
+  width: 96%;
+  gap: 20px;
+}
+
+mat-date-range-input.full-width input {
+  flex: 1;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+  padding: 4px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  
+}
+
+mat-datepicker-toggle {
+  margin-left: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+input[matStartDate],
+input[matEndDate] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 8px;
+} */
+
+
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+
+.date-range-field input {
+  flex: 1; /* ensures equal width */
+}
+
+
+.date-range-container {
+  display: flex;
+  gap: 1rem; /* space between Start and End Date */
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.date-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+
+.employee-details-card {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 24px;
+  border: 2px solid #ff6600;
+  border-radius: 12px;
+
+  box-shadow: 0 0 12px orange;
+  margin-top: 24px;
+}
+
+.employee-card-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-employee-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 20px 0;
+  text-align: right;
+
+}
+
+.add-employee-btn-wrapper button {
+  background: linear-gradient(to right, #eb6d0d, #f59404); /* yellow/orange gradient */
+  color: #000; 
+  border: none;
+  border-radius: 8px; 
+  padding: 10px 24px;
+  font-weight: 590;
+  text-transform: none; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.add-employee-btn-wrapper button:hover {
+  background: linear-gradient(to right, #eb6d0d, #f59404);
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.full-width-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 8px orange;
+}
+
+.full-width-table th {
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-weight: bold;
+  padding: 12px;
+  text-align: left;
+}
+
+.full-width-table td {
+  padding: 6px 8px;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid var(--bg-color);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  font-size: 14px;
+}
+
+.full-width-table tr:hover {
+  background-color: var(--bg-color);
+  transition: var(--bg-color) 0.2s ease;
+}
+
+.full-width-table input,
+.full-width-table select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid orange;
+  border-radius: 8px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+.full-width-table td input,
+.full-width-table td select,
+.full-width-table td mat-form-field {
+  width: 155px; 
+  min-width: 155px;
+  max-width: 155px;
+  box-sizing: border-box;
+}
+.full-width-table td mat-select {
+  width: 155px !important;
+}
+
+.full-width-table input:focus, 
+.full-width-table select:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+
+
+table.mat-table th {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  font-weight: bold;
+  font-size: 14px;
+}
+
+table.mat-table td {
+  font-size: 14px;
+  background-color: var(--bg-color);
+  padding: 8px;
+  border-bottom: 1px solid var(--bg-color);
+  color: var(--text-color);
+  text-align: center;
+
+}
+
+mat-select, input[matInput], mat-checkbox {
+  width: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  
+}
+
+mat-form-field {
+  width: 100%;
+  max-width: 100%;
+  color: var(--text-color);
+}
+
+/* .dark-theme ::ng-deep .mat-datepicker-toggle-default-icon {
+  color: white !important;
+}
+
+.dark-theme ::ng-deep .mat-select-value {
+  color: var(--text-color) !important;
+} */
+
+
+.dark-theme ::ng-deep .mat-select-arrow {
+  color: var(--text-color) !important;
+}
+ /* Table wrapper allows horizontal scroll */
+ .table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background-color: var(--bg-color); 
+  border-radius: 8px;
+  color: var(--text-color);
+} 
+
+/* Full-width table with minimum width to avoid collapse */
+.full-width-table {
+  width: 100%;
+  min-width: 1028px; /* Adjust based on your column count */
+  border-collapse: collapse;
+  border: 1px solid var(--bg-color);
+  border-radius: 8px;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+
+
+mat-form-field, input[matInput], mat-select, mat-slide-toggle {
+  width: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--bg-color);
+  border-radius: 8px;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* On small screens: tweak layout */
+@media (max-width: 768px) {
+  .full-width-table {
+    min-width: 768px;
   }
 
-  // Theme Toggle
-  toggleTheme(): void {
-    this.isDarkMode = !this.isDarkMode;
-    const root = document.documentElement;
-    if (this.isDarkMode) {
-      root.classList.add('dark-mode', 'dark-theme');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      root.classList.remove('dark-mode', 'dark-theme');
-      localStorage.setItem('theme', 'light');
-    }
-    setTimeout(() => {
-      this.cdRef.detectChanges();
-    }, 0);
-  }
+}
 
-  // Scroll to first invalid
-  scrollToFirstError(): void {
-    const firstInvalid = document.querySelector('.ng-invalid') as HTMLElement | null;
-    if (firstInvalid) {
-      setTimeout(() => {
-        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        firstInvalid.focus();
-      }, 0);
-    }
-  }
+input, select {
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  width: 100%;
+  background-color: var(--input-bg-color);
+  box-shadow: none;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
 
-  // Set theme on init
-  ngOnInit() {
-    const themePref = localStorage.getItem('theme');
-    if (themePref === 'dark') {
-      this.isDarkMode = true;
-      document.documentElement.classList.add('dark-mode', 'dark-theme');
-    } else {
-      this.isDarkMode = false;
-      document.documentElement.classList.remove('dark-mode', 'dark-theme');
-    }
-     this.refreshTable();
+input:focus, select:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
+}
+
+
+/* Action Buttons */
+.table-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.table-action-btn.save {
+  background-color: #28a745;
+  color: white;
+}
+
+.table-action-btn.cancel {
+  background-color: #dc3545;
+  color: white;
+}
+
+.table-action-btn.edit {
+  background-color: #ffc107;
+  color: black;
+}
+
+.table-action-btn:hover {
+  opacity: 0.85;
+}
+
+::ng-deep .mat-datepicker-toggle .mat-icon,
+::ng-deep .mat-datepicker-toggle-default-icon path {
+  fill: var(--icon-color) !important; /* For inline SVGs */
+  color: var(--icon-color) !important; /* For font-based icons */
+}
+
+/* Light mode */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0); /* Black icon */
+  color: var(--icon-color); 
+}
+
+/* Dark mode */
+.dark-theme input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* White icon */
+  color: var(--icon-color);
+}
+
+td .action-buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 2px; /* space between buttons */
   }
+td .action-buttons button {
+  cursor: pointer;
+  min-width:auto;
+  margin: 0;
+}
+.action-button mat-icon {
+  font-size: 18px;
 }
